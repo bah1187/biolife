@@ -40,14 +40,14 @@ search form panel
 /* =========================================================================
 slideout filters for search results on small screens
 ========================================================================= */
-  if ($('#search-results').length == 1) window.APP.MODELS.FilterSlideOut.create({
-      breakpoint: 800,
-      animationSpeed: 200,
-      pageWrapId: 'page',
-      filterType: 'search',
-      openToggle: 'Filter',
-      closeToggle: 'Close'
-  });
+  // if ($('#search-results').length == 1) window.APP.MODELS.FilterSlideOut.create({
+  //     breakpoint: 800,
+  //     animationSpeed: 200,
+  //     pageWrapId: 'page',
+  //     filterType: 'search',
+  //     openToggle: 'Filter',
+  //     closeToggle: 'Close'
+  // });
 
 /* =========================================================================
 social share open/close toggle
