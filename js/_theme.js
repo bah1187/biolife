@@ -37,17 +37,6 @@ search form panel
   searchFormExpandable();
   mq.end.addListener(searchFormExpandable);
 
-/* =========================================================================
-slideout filters for search results on small screens
-========================================================================= */
-  // if ($('#search-results').length == 1) window.APP.MODELS.FilterSlideOut.create({
-  //     breakpoint: 800,
-  //     animationSpeed: 200,
-  //     pageWrapId: 'page',
-  //     filterType: 'search',
-  //     openToggle: 'Filter',
-  //     closeToggle: 'Close'
-  // });
 
 /* =========================================================================
 social share open/close toggle
@@ -80,6 +69,44 @@ Search Toggle
 
 
 
+/* =========================================================================
+Smooth Scroll
+========================================================================== */
+
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+
+
+/* =========================================================================
+Change saved job button text
+========================================================================== */
+  $("main").on("click", ".js-save-job-btn", function() {
+
+    var saveButtonText = $(this).hasClass("saved") ? $(this).attr("data-unsave-job-text") : $(this).attr("data-save-job-text");
+
+    $(this).text(saveButtonText);
+
+});
+
+/* =========================================================================
+Change saved job button text
+========================================================================== */
+
+
+
+$('.js-saved-jobs-toggle').click(function(){
+ $('.saved-jobs-list').slideToggle("fast");
+});
 
 
 })();  // End document ready

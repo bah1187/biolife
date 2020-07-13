@@ -113,7 +113,7 @@ $light-blue: #1e96ca;
 $orange: #ee7012;
 
 //Units
-$line-height: 1.6;
+$line-height: 1.25;
 $reset-line-height: 1;
 
 //Fonts
@@ -215,7 +215,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,secti
 body {
     line-height: $line-height;
 
-
 }
 
 body {
@@ -315,9 +314,13 @@ body {
     }
 }
 
+p {
+	line-height: 1.6;
+}
+
 a {
 	color: $text;
-	// text-decoration: none;
+	text-decoration: none;
 	cursor: pointer;
 
 
@@ -523,6 +526,7 @@ Header
 header {
 	padding: 25px 20px;
 	border-bottom: 3px solid $orange;
+
 	@include breakpoint($end-small) {
 		padding: 50px 20px 20px;
 	}
@@ -530,6 +534,8 @@ header {
 	> div {
 		max-width: 1650px;
 		margin: 0 auto;
+		position: relative;
+
 	}
 
 	.logo {
@@ -616,6 +622,48 @@ header {
 			}
 		}
 	}
+
+
+// Saved Jobs dropdown
+
+	.saved-jobs-list {
+		position: absolute;
+		top: 85px;
+		z-index: 9999999;
+		right: -20px;
+		width: 400px;
+		display: none;
+		-webkit-box-shadow: 0px 0px 16px -3px #000000;
+    box-shadow: 0px 0px 16px -3px #000000;
+    padding: 25px 30px;
+    background: #fff;
+
+		li {
+
+			&:not(:last-of-type) {
+				margin-bottom: 20px;
+			}
+		}
+
+		a {
+			padding: 0 0 3px;
+			display: block;
+
+    	font-weight: 800;
+    	color: #1f1f7c;
+    	font-size: 15px;
+		}
+
+		.location {
+			font-size: 14px;
+		}
+	}
+
+	.no-jobs {
+		font-weight: $weight-extra-bold;
+	}
+
+
 }
 
 /* =================================================================
@@ -723,7 +771,13 @@ Banner
 			}
 		}
 
-		#search & {
+		#search &,
+		#job-location &,
+		#error &,
+		#ja-mgmt &,
+		#sitemap &,
+		#Unsubscribe &,
+		#JobAlertVerify & {
 			background: url("../v1_0/img/banner-sr-sm.jpg") no-repeat;
 			background-size: cover;
 			padding-top: 46%;
@@ -1414,7 +1468,7 @@ search results - result list
 	text-align: left;
 
     &:after {
-        content: "[x]";
+        content: "x";
         display: inline-block;
         margin-left: 5px;
     }
@@ -1428,6 +1482,21 @@ search results - result list
             content: close-quote;
         }
     }
+
+
+}
+
+
+.search-results-options {
+
+	li {
+		border-bottom: none !important;
+		margin-bottom: 5px;
+	}
+}
+
+#applied-filters-label {
+	margin-bottom: 10px;
 }
 
 /* =================================================================
@@ -1951,7 +2020,7 @@ job details - style overrides for ATS description
 
     * {
         color: #000 !important;
-        font: inherit 1rem Arial, Helvetica, sans-serif !important;
+        font-family: $base-font !important;
         line-height: 1.4em !important;
 
         &:not(br):empty {
@@ -1965,7 +2034,7 @@ job details - style overrides for ATS description
     }
 
     p, div, span, font {
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: $base-font;
         font-size: 1em !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
@@ -1978,43 +2047,69 @@ job details - style overrides for ATS description
 
     ul, ol {
         list-style-position: outside;
-        margin: 0 0 1em 2em !important;
+        margin: 0 0 2em 2em !important;
     }
+
+		li {
+			list-style-type: disc;
+			margin-bottom: 20px;
+		}
 }
 
 
 .job-apply {
-    clear: both;
-    display: block;
-    font-size: 1.1em;
-    margin: 1em 0;
-    padding: 5px 10px;
-
-    @include breakpoint($mid_small) {
-        float: right;
-        line-height: 1.4em;
-        min-width: 6em;
-
-        &.top {
-            margin: 0 0 1em 1em;
-        }
-    }
+	display: block;
+	background: $orange;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: $weight-extra-bold;
+	border-radius: 3px;
+	border: 1px solid $orange;
+	text-align: center;
+	text-decoration: none;
+	height: 55px;
+	padding: 13px 10px 10px;
+	font-size: 22px;
+	letter-spacing: 3px;
+	margin-bottom: 20px;
+	@include breakpoint($end-small) {
+		width: 49%;
+	}
 }
 
 .job-description {
 	margin: 60px 0 0;
 
+	@include breakpoint($end-small) {
+		float: left;
+		width: 57%;
+		margin: 100px 0 0;
+	}
+	@include breakpoint($end-small) {
+		width: 60%;
+	}
+
 	h1 {
 		color: $orange;
 		font-size: 24px;
-		margin-bottom: 7px;
+		margin-bottom: 12px;
+		line-height: $reset-line-height;
+		@include breakpoint($end-small) {
+			font-size: 64px;
+			margin-bottom: 24px;
+		}
 	}
 
 	&__title {
 		font-size: 20px;
 		color: #0d1029;
-		line-height: 1.2;
 		margin-bottom: 5px;
+		@include breakpoint($end-small) {
+			font-size: 24px;
+		}
+		@include breakpoint(1200px) {
+			font-size: 48px;
+		}
 	}
 
 	&__location {
@@ -2022,31 +2117,94 @@ job details - style overrides for ATS description
 		color: #1f1f7c;
 		font-size: 18px;
 		text-transform: uppercase;
+		letter-spacing: 2px;
+		padding-left: 2px;
+		@include breakpoint(1200px) {
+			padding-left: 6px;
+		}
+	}
+
+	&__buttons {
+		margin: 40px 0 50px;
+		@include breakpoint($end-small) {
+			display: flex;
+			justify-content: space-between;
+			max-width: 770px;
+		}
 	}
 
     #save-job,
 	&[data-save-jobs="true"] .js-save-job-btn {
-        float: right;
-        background-image: url("../../../img/client/star-icon-gray.png");
-        background-repeat: no-repeat;
-        background-position: right;
-        background-color: transparent;
-        height: 25px;
-        border: none;
-        text-align: right;
-        padding-right: 35px;
-        opacity: .9;
-        margin-bottom: 1em;
+		display: block;
+		background: #484c53;
+		color: #fff;
+		text-transform: uppercase;
+		font-weight: $weight-extra-bold;
+		border-radius: 3px;
+		border: 1px solid #484c53;
+		text-align: center;
+		text-decoration: none;
+		width: 100%;
+		height: 55px;
+		font-size: 22px;
+		letter-spacing: 3px;
+		padding: 13px 10px 10px;
+
+		@include breakpoint($end-small) {
+			width: 49%;
+		}
 
         &:hover, &:focus {
             opacity: 1;
             outline: none;
         }
 		&.saved {
-			background-image: url("../../../img/client/star-icon.png") !important;
+
 		}
     }
+
+
+		.job-id {
+			margin-bottom: 26px;
+			@include breakpoint($end-small) {
+				margin-bottom: 35px;
+			}
+		}
 }
+
+#job {
+
+	aside {
+		@include breakpoint($end-small) {
+			float: right;
+			width: 35%;
+			max-width: 500px;
+			margin: 260px 0 0;
+		}
+	}
+
+}
+
+
+.location-callout {
+
+	&__link {
+	  display: block;
+    color: #1580be;
+    text-transform: uppercase;
+    font-weight: 800;
+    border-radius: 3px;
+    border: 2px solid #1580be;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    height: 55px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    padding: 17px 10px;
+	}
+}
+
 
 /* =================================================================
 language redirection
@@ -2077,6 +2235,430 @@ job matching page
 }
 
 /* =================================================================
+Job Alert Management Page styles
+================================================================= */
+#ja-mgmt {
+
+	.wrapper {
+		margin: 40px auto 0;
+		@include breakpoint($end-small) {
+			margin: 60px auto 0;
+		}
+	}
+	h1 {
+		    padding: 0 20px 0 0;
+		margin: 0 0 19px 0;
+		font-size: 20px;
+	}
+
+
+	#job-alert-list {
+		margin: 15px 0 20px;
+		@include breakpoint($end-small) {
+			float: left;
+			width: 49%;
+			margin: 0 0 15px;
+		}
+
+		.no-subscriptions {
+			font-size: 15px;
+		}
+
+		li {
+			margin: 15px 0;
+		}
+
+		button {
+			display: block;
+			background: $primary;
+			color: #fff;
+			font-weight: bold;
+			padding: 7px;
+			margin-top: 5px;
+		}
+	}
+
+	#job-alert-list-editor {
+		margin-bottom: 30px;
+		background-color: #e1eff2;
+		padding: 20px;
+		clear: both;
+		padding-bottom: 70px;
+		@include clearfix;
+		@include breakpoint($end-small) {
+			padding-bottom: 25px;
+			margin-bottom: 60px;
+		}
+
+		h1 {
+			margin: 15px 0;
+		}
+
+		label {
+			font-size: 14px;
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		input {
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			width: 100%;
+			height: 37px;
+			font-size: 14px;
+		}
+
+		button {
+			border-radius: 0;
+			background-color: #fff;
+			font-size: 15px;
+			font-weight: normal;
+			padding: 0.5em 1em;
+			color: #000;
+			border: 0;
+			float: right;
+			margin-right: 35px;
+		}
+
+		p {
+			font-size: 15px;
+			margin-bottom: 15px;
+		}
+	}
+
+	.job-alert-list-category {
+		@include breakpoint($end-small) {
+			float: left;
+			width: calc(50% - 30px);
+			margin-top: 10px;
+		}
+	}
+
+	.job-alert-list-location {
+		@include breakpoint($end-small) {
+			float: right;
+			width: calc(50% - 30px);
+			margin-top: 10px;
+		}
+	}
+
+	#job-alert-unsubscribe {
+		margin-bottom: 30px;
+		@include breakpoint($end-small) {
+			float: right;
+			width: 49%;
+		}
+
+		p {
+			font-size: 15px;
+			margin: 15px 0;
+		}
+
+		button {
+			border-radius: 0;
+			border: 0;
+			background-color: $primary;
+			font-weight: bold;
+			padding: 0.5em 1em;
+			color: #fff;
+		}
+	}
+}
+
+/* =================================================================
+Error/ Secondary pages
+================================================================= */
+
+#error {
+
+	.wrapper {
+		padding: 40px 20px 40px;
+		@include breakpoint($end-small) {
+			padding: 60px 20px 60px;
+		}
+		h1 {
+			color: $orange;
+			font-size: 24px;
+			text-transform: capitalize;
+			margin-bottom: 10px;
+			@include breakpoint($end-small) {
+				font-size: 64px;
+				margin-bottom: 3px;
+			}
+		}
+
+			p {
+				font-weight: 100;
+			}
+
+			a {
+				 color: #0000FF;
+				 text-decoration: underline;
+			}
+
+	}
+}
+
+#Unsubscribe,
+#JobAlertVerify {
+	.wrapper {
+		padding: 40px 20px 40px;
+			@include breakpoint($end-small) {
+				padding: 60px 20px 60px;
+			}
+
+			h1 {
+				font-weight: $weight-extra-bold;
+				font-size: 18px;
+				text-align: center;
+				@include breakpoint($end-small) {
+					font-size: 24px;
+				}
+			}
+		}
+}
+
+/* =================================================================
+Sitemap
+================================================================= */
+
+#sitemap {
+
+	.wrapper {
+		margin: 40px auto;
+		  @include breakpoint($end-small) {
+				margin: 60px auto;
+			}
+
+		h2 {
+			margin-bottom: 20px;
+		}
+	}
+
+  .job-location ul, .job-category ul, .job-keyword ul, .sitemap-cp ul {
+    list-style: none;
+    margin: 0 0 30px 0;
+		@include breakpoint($end-small) {
+			margin: 0 0 50px 0;
+		}
+
+		li {
+			display: inline-block;
+			width: 100%;
+		}
+
+    @include breakpoint($end-small) { // could use mid-small
+      -webkit-column-count: 2;/* Chrome, Safari, Opera */
+      -moz-column-count: 2;/* Firefox */
+      column-count: 2;
+    }
+
+    @include breakpoint(1200px) { // could use end-mall
+      -webkit-column-count: 3;/* Chrome, Safari, Opera */
+      -moz-column-count: 3;/* Firefox */
+      column-count: 3;
+    }
+  }
+} // end sitemap page
+
+/* =================================================================
+Job Locations page
+================================================================= */
+
+#job-location {
+
+
+    .job-apply {
+        width: 128px;
+
+		text-transform: uppercase;
+		color: #fff;
+
+		font-size: 20px;
+		padding: 10px;
+		display: inline-block;
+		text-align: center;
+		margin-bottom: 20px;
+		@include breakpoint(360px) {
+		   width: 145px;
+		   font-size: 15px;
+		}
+		@include breakpoint($end-small) {
+		    font-size: 19px;
+		    width: 160px;
+		}
+
+		&.top {
+		    @include breakpoint(400px) {
+		        margin-right: 10px;
+		    }
+		}
+    }
+
+}
+
+
+.job-map {
+    padding: 40px 0;
+    @include breakpoint($end-small) {
+        padding: 50px 0;
+    }
+
+     h2 {
+			 color: $orange;
+		 	font-size: 24px;
+		 	text-transform: capitalize;
+		 	margin-top: 60px;
+		 	margin-bottom: 50px;
+		 	@include breakpoint($end-small) {
+		 		font-size: 64px;
+		 	}
+    }
+
+     & > h2 {
+        font-size: 27px;
+        font-weight: 500;
+
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        @include breakpoint($end-small) {
+            font-size: 36px;
+        }
+    }
+
+
+
+    h3 {
+        font-size: 20px;
+        font-weight: 500;
+
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+}
+
+.js .job-map .job-map-canvas {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.job-map-nearby {
+    margin-bottom: 30px;
+    text-align: center;
+
+    @include breakpoint($end-small) {
+        text-align: left;
+        float: left;
+        width: 60%;
+    }
+
+    h3 {
+        // margin-bottom: 10px;
+    }
+
+    ul {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+
+        li {
+            width: 48%;
+            margin-bottom: 12px;
+            word-break: break-word;
+            @include breakpoint($end-small) {
+                width: 49%;
+                margin-bottom: 0;
+            }
+             @include breakpoint(1400px) {
+                width: 24%;
+            }
+
+            a {
+								background: $blue;
+                padding: 15px 10px;
+                margin: 5px 0;
+                transition: 0.25s;
+                font-size: 16px;
+                text-align: center;
+                text-transform: uppercase;
+                display: block;
+		        		text-transform: uppercase;
+		        		color: #fff;
+								text-decoration: none;
+		        		text-align: center;
+								font-weight: $weight-bold
+            }
+        }
+
+    }
+}
+
+.job-map .job-map-directions input:not([type="submit"]), .job-map .job-map-directions select {
+   border: 1px solid #b3adac;
+    color: #493d3b;
+    border-radius: 2px;
+    width: 100%;
+    height: 52px;
+    -webkit-appearance: none;
+    padding-left: 15px;
+    font-size: 16px;
+}
+
+.job-map-directions {
+    text-align: center;
+		margin-bottom: 50px;
+    @include breakpoint($end-small) {
+        text-align: left;
+        float: right;
+        width: 35%;
+    }
+
+    label {
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+		button {
+			border: 1px solid $blue;
+			background: $blue;
+			color: #fff;
+			font-weight: $weight-bold;
+			padding: 5px 14px;
+			text-transform: uppercase;
+		}
+}
+
+.job-map .job-map-directions p {
+    margin-bottom: 12px;
+}
+
+.job-map input[type="submit"] {
+   width: 128px;
+
+	text-transform: uppercase;
+	color: #fff;
+
+	font-size: 20px;
+	padding: 10px;
+	display: inline-block;
+	text-align: center;
+}
+
+.job-map-active {
+
+    opacity: .7;
+}
+
+
+/* =================================================================
 maintenance page
 ================================================================= */
 .maintenance-image, .maintenance-message {
@@ -2096,14 +2678,14 @@ maintenance page
 /* =================================================================
 social share - need to update icon references to match shared resources
 ================================================================= */
-$social-share-icon-color: rgba(128,0,128,1);
+$social-share-icon-color: #484c53;
 $social-share-icon-background: transparent;
 
  #social-share a {
   border-radius: 36px !important;
   background-size: 80% !important;
   background-color: transparent !important;
-	border: 1px solid rgba(128,0,128,1);
+	border: 2px solid #d0d5de;
   &.social-media-facebook, &.facebook {
     background-position: 0px 2px !important;
   }
@@ -2111,15 +2693,21 @@ $social-share-icon-background: transparent;
 
 
  #social-share {
+	 margin-bottom: 35px;
 
 	ul {
 			list-style: none;
 			margin: 0;
       padding: 0;
+			text-align: center;
 	}
 
 	li {
 			display: inline-block;
+
+			&:not(:last-of-type) {
+				padding-right: 10px;
+			}
 	}
 
   a {
@@ -2128,8 +2716,22 @@ $social-share-icon-background: transparent;
 		overflow: hidden;
 		text-align: left;
     background: center / contain no-repeat;
-    width: 32px;
-    height: 32px;
+		width: 38px;
+		height: 38px;
+		@include breakpoint(1200px) {
+			width: 54px;
+			height: 54px;
+		}
+	}
+
+	h3 {
+		font-size: 22px;
+		color: #1f1f7c;
+		text-align: center;
+		margin-bottom: 30px;
+		@include breakpoint($end-small) {
+			font-size: 30px;
+		}
 	}
 
 }
@@ -2149,29 +2751,6 @@ $social-share-icon-background: transparent;
 			@include icon-bg-facebook($social-share-icon-color, $social-share-icon-background);
 		}
 
-		&.googleplus {
-			@include icon-bg-googleplus($social-share-icon-color, $social-share-icon-background);
-		}
-
-		&.tumblr {
-			@include icon-bg-tumblr($social-share-icon-color, $social-share-icon-background);
-		}
-
-		&.renren {
-			@include icon-bg-renren($social-share-icon-color, $social-share-icon-background);
-		}
-
-		&.viadeo {
-			@include icon-bg-viadeo($social-share-icon-color, $social-share-icon-background);
-		}
-
-		&.xing {
-			@include icon-bg-xing($social-share-icon-color, $social-share-icon-background);
-		}
-
-		&.weibo {
-			@include icon-bg-weibo($social-share-icon-color, $social-share-icon-background);
-		}
 
 		&.email {
 			@include icon-bg-email($social-share-icon-color, $social-share-icon-background);
